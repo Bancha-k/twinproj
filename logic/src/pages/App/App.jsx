@@ -44,7 +44,7 @@ export default class App extends Component {
     if (arr.length === teamLimit) {
       this.setState({ msg: 'full' })
     } else {
-      const data = [level, style, favTeam, age]
+      const data = [level, style, age, favTeam]
       const obj = { name, stadium, time, data }
       const checkTeamLength = arr.length === teamLimit - 1 && true
       await this.setState({ list: [...list, obj], full: checkTeamLength })
