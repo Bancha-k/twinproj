@@ -15,25 +15,26 @@ export default class App extends Component {
 
   state = {
     list: [],
+    team: [],
+    teamLimit: 14,
+    msg: '',
+    full: false,
     name: '',
     stadium: '',
     time: '',
-    interest: [],
     level: '',
     style: '',
     age: '',
-    favTeam: '',
-    teamLimit: 14,
-    msg: ''
+    favTeam: ''
   }
 
   handleInput = (f, v) => {
     this.setState({ [f]: v.target.value })
   }
 
-  submit = () => {
-    this.setState({ msg: '', team: false })
-    const { name, stadium, time, list, level, style, age, favTeam, teamLimit } = this.state
+  submit = async () => {
+    this.setState({ msg: '' })
+    const { name, stadium, time, level, style, age, favTeam, list, teamLimit } = this.state
     let arr = []
     list.forEach(val => {
       if (val.stadium === stadium && val.time === time) {
@@ -45,16 +46,21 @@ export default class App extends Component {
     } else {
       const data = [level, style, favTeam, age]
       const obj = { name, stadium, time, data }
-      const checkTeamLength = arr.length === teamLimit - 1 ? true : false
-      this.setState({ list: [...list, obj], team: checkTeamLength })
+      const checkTeamLength = arr.length === teamLimit - 1 && true
+      await this.setState({ list: [...list, obj], full: checkTeamLength })
+      this.process()
     }
+  }
+
+  process = () => {
+    const { list } = this.state
+    const result = dataAnalyze(list)
+    this.setState({ team: result })
   }
 
   render() {
 
-    const { name, stadium, time, list, level, style, age, favTeam, msg, team } = this.state
-
-    team && dataAnalyze(list, stadium, time)
+    const { name, stadium, time, list, level, style, age, favTeam, msg, team, full } = this.state
 
     const header = (
       <header className="App-header">
@@ -163,6 +169,12 @@ export default class App extends Component {
       </li>
     ))
 
+    const list2 = team.map((val, key) => (
+      <li key={key}>
+        <label>{val.name} -  {val.data} - {val.team}</label>
+      </li>
+    ))
+
     return (
       <div className="App">
         {header}
@@ -174,8 +186,9 @@ export default class App extends Component {
               {submit}
             </Col>
             <Col xs={6}>
+              length:{list.length} - stadium:{stadium} - time:{time}
               {msgTag}
-              {list1}
+              {full ? list2 : list1}
             </Col>
           </Row>
         </div>

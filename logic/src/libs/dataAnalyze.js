@@ -3,20 +3,18 @@
  * @Email: comdevx@gmail.com 
  * @Date: 2018-09-03 23:56:35 
  * @Last Modified by: ComdevX
- * @Last Modified time: 2018-09-05 16:30:52
+ * @Last Modified time: 2018-09-06 00:26:26
  */
 
 import _ from 'lodash'
 
 export default (data) => {
-    setTeam(data)
-    // setTeam(timeArray)
-    // return timeArray
+    const result = setTeam(data)
+    return result
 }
 
 const setTeam = (data) => {
     let result = []
-    let no = 1
     data.forEach((pers, index) => {
         let arr = []
         data.forEach((pers2, index1) => {
@@ -45,12 +43,12 @@ const setTeam = (data) => {
                 team: 'A'
             })
         }
-        let num = 2 - 1
+        let num = 1
         let team = false
         for (let i = 0; i < num; i++) {
             if (arr[i]) {
                 const dup = checkDuplicate(result, arr[i].name)
-                if (dup && arr2.length > 0) {
+                if (dup) {
                     arr2.push({
                         name: arr[i].name,
                         data: arr[i].data,
@@ -62,15 +60,13 @@ const setTeam = (data) => {
                         team: team ? 'A' : 'B'
                     })
                     team = team ? false : true
-                    arr2.length === 2 && no++
                 } else {
                     num++
                 }
             }
         }
     })
-    console.log(result)
-    // return result
+    return result
 }
 
 const checkDuplicate = (data, value) => {
