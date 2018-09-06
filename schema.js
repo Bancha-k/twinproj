@@ -1,58 +1,32 @@
 exports.typeDefs = `
 
-    type User {
+    type Profile {
         _id: ID!
-        username: String! @unique
-        password: String!
-        email: String!
-        role: UserRole!
-        demanding: [Reservation]
-        createdDate: String
-    }
-
-    enum UserRole {
-        ADMIN
-        USER
-    }
-
-    type Reservation {
-        _id: ID!
-        username: String!
-        stadiumName: String!
+        fullName: String!
+        stadium: String!
         selectedTime: String!
-        reservedDate: String
-    }
-
-    type Stadium {
-        _id: ID!
-        name: String!
-        periodTime: String!
-        like: Int
-        createdDate: String
-    }
-
-    type Token {
-        token: String!
+        level: String!
+        style: String!
+        age: String!
+        favoriteTeam: String!
+        matched: Boolean
+        clearState: Boolean
+        recordDate: String!
     }
 
     type Query {
-        getCurrenUser: User
-        getUser: [User]
-        getAllReservations: [Reservation]
-        getAllStadiums: [Stadium]
+        getAllProfiles: [Profile]
     }
 
     type Mutation {
-        addReservation(
-            username: String!, 
-            stadiumName: String!, 
-            selectedTime: String!): Reservation
-        signinUser(username: String!, password: String!): Token
-        signupUser(
-            username: String!, 
-            password: String!,
-            email: String!
-        ): Token
+        addProfile(
+            fullName: String!,
+            stadium: String!,
+            selectedTime: String!,
+            level: String!,
+            style: String!,
+            age: String!,
+            favoriteTeam: String!): Profile
     }
 
 `
