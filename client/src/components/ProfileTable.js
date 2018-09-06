@@ -8,6 +8,8 @@ import { GET_ALL_PROFILES } from '../queries'
 const ProfileTable = () => (
   <Query query={GET_ALL_PROFILES}>
     {({ loading, error, data }) => {
+      console.log(data.getAllProfiles)
+      // const AllProfilesLength = data.getAllProfiles.length
       const columns = [
         {
           title: 'CREATED DATE',
@@ -49,7 +51,7 @@ const ProfileTable = () => (
         },
         {
           title: 'JOB',
-          dataIndex: 'job',
+          dataIndex: 'age',
           align: 'right'
         },
         {
@@ -70,6 +72,7 @@ const ProfileTable = () => (
           </div>
           <Table
             columns={columns}
+            rowKey={record => record._id}
             dataSource={data.getAllProfiles}
             size="middle"
           />
@@ -78,83 +81,5 @@ const ProfileTable = () => (
     }}
   </Query>
 )
-
-// class ProfileTable extends React.Component {
-//   render() {
-//     const columns = [
-//       {
-//         title: 'CREATED DATE',
-//         dataIndex: 'createdDate',
-//         align: 'left'
-//       },
-//       {
-//         title: 'FULLNAME',
-//         dataIndex: 'fullName',
-//         align: 'left'
-//       },
-//       {
-//         title: 'STADIUM',
-//         dataIndex: 'stadium',
-//         align: 'right'
-//       },
-//       {
-//         title: 'TIME',
-//         dataIndex: 'selectedTime',
-//         align: 'right'
-//       },
-//       {
-//         title: 'LEVEL',
-//         dataIndex: 'selectedTime',
-//         align: 'right'
-//       },
-//       {
-//         title: 'STYLE',
-//         dataIndex: 'selectedTime',
-//         align: 'right'
-//       },
-//       {
-//         title: 'AGE',
-//         dataIndex: 'selectedTime',
-//         align: 'right'
-//       },
-//       {
-//         title: 'JOB',
-//         dataIndex: 'selectedTime',
-//         align: 'right'
-//       },
-//       {
-//         title: 'FAVORITE TEAM',
-//         dataIndex: 'selectedTime',
-//         align: 'right'
-//       }
-//     ]
-//     const data = [
-//       //   {
-//       //     createdDate: '1',
-//       //     fullName: '1',
-//       //     stadium: '1',
-//       //     selectedTime: '1'
-//       //   }
-//     ]
-//     return (
-//           <div>
-//             <div>
-//               {' '}
-//               <h2>Profile Detail</h2>{' '}
-//               <h3 style={{ float: 'right', marginRight: 40, marginTop: -45 }}>
-//                 <Icon type="user" style={{ fontSize: 25, color: '#3EC8C3' }} />{' '}
-//                 Total:
-//               </h3>
-//             </div>
-//             ;
-//             <Table
-//               columns={columns}
-//               dataSource={data.getAllProfiles}
-//               size="middle"
-//             />
-//           </div>
-//     )
-//   }
-// }
 
 export default ProfileTable
