@@ -9,6 +9,7 @@ import {
 import './index.css'
 import App from './components/App'
 import Profile from './components/Profile'
+import Stadium from './components/Stadium'
 
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
@@ -38,7 +39,8 @@ const Root = () => (
     <Switch>
       <Route path="/" exact component={App} />
       <Route path="/profile" exact component={Profile} />
-      <Redirect to="/profile" />
+      <Route path="/stadium" exact component={Stadium} />
+      <Redirect to="/" />
     </Switch>
   </Router>
 )

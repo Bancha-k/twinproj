@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 import { Layout, Menu, Icon, Dropdown, Input } from 'antd'
 import './Profile.css'
@@ -18,6 +19,10 @@ class Profile extends React.Component {
     })
   }
 
+  nextPath(path) {
+    this.props.history.push(path)
+  }
+
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -29,15 +34,15 @@ class Profile extends React.Component {
         >
           <div className="logo" />
           <Menu
-            style={{ background: '#333333', color: '#fff', opacity: 0.5 }}
+            style={{ background: '#333333', color: '#fff', opacity: 0.8 }}
             mode="inline"
             defaultSelectedKeys={['1']}
           >
-            <Menu.Item key="1">
+            <Menu.Item key="1" onClick={() => this.nextPath('/profile')}>
               <Icon type="user" style={{ color: '#3EC8C3' }} />
               <span>Profile</span>
             </Menu.Item>
-            <Menu.Item key="2">
+            <Menu.Item key="2" onClick={() => this.nextPath('/stadium')}>
               <Icon type="home" style={{ color: '#3EC8C3' }} />
               <span>Stadium</span>
             </Menu.Item>
@@ -88,7 +93,6 @@ class Profile extends React.Component {
               marginRight: '24px',
               padding: 24,
               background: '#fff'
-              //   minHeight: 280
             }}
           >
             <ProfileTable />
@@ -102,4 +106,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile
+export default withRouter(Profile)

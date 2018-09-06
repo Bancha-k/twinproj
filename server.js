@@ -24,7 +24,10 @@ const schema = makeExecutableSchema({
 //Connect DB
 mongoose
   // .connect('mongodb://work:work123@172.104.161.205:27017/WORK')
-  .connect(process.env.MONGO_URL_WORK)
+  .connect(
+    process.env.MONGO_URL_WORK,
+    { useNewUrlParser: true }
+  )
   .then(() => console.log('DB Connected'))
   .catch(err => console.error(err))
 

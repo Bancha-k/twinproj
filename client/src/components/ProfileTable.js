@@ -8,7 +8,6 @@ import { GET_ALL_PROFILES } from '../queries'
 const ProfileTable = () => (
   <Query query={GET_ALL_PROFILES}>
     {({ loading, error, data }) => {
-      console.log(data.getAllProfiles)
       // const AllProfilesLength = data.getAllProfiles.length
       const columns = [
         {
@@ -16,8 +15,10 @@ const ProfileTable = () => (
           dataIndex: 'recordDate',
           align: 'left',
           render: date => (
-            <Moment format="YYYY-MM-DD &nbsp;&nbsp;HH:MM">{date}</Moment>
-          )
+            <Moment format="YYYY-MM-DD &nbsp;&nbsp;HH:mm">{date}</Moment>
+          ),
+          defaultSortOrder: 'descend',
+          sorter: (a, b) => a.recordDate - b.recordDate
         },
         {
           title: 'FULLNAME',
@@ -27,7 +28,26 @@ const ProfileTable = () => (
         {
           title: 'STADIUM',
           dataIndex: 'stadium',
-          align: 'right'
+          align: 'right',
+          filters: [
+            {
+              text: 'Stadium 1',
+              value: 'Stadium 1'
+            },
+            {
+              text: 'Stadium 2',
+              value: 'Stadium 2'
+            },
+            {
+              text: 'Stadium 3',
+              value: 'Stadium 3'
+            },
+            {
+              text: 'Stadium 4',
+              value: 'Stadium 4'
+            }
+          ],
+          onFilter: (value, record) => record.stadium.indexOf(value) === 0
         },
         {
           title: 'TIME',
@@ -37,7 +57,22 @@ const ProfileTable = () => (
         {
           title: 'LEVEL',
           dataIndex: 'level',
-          align: 'right'
+          align: 'right',
+          filters: [
+            {
+              text: 'Low',
+              value: 'Low'
+            },
+            {
+              text: 'Medium',
+              value: 'Medium'
+            },
+            {
+              text: 'High',
+              value: 'High'
+            }
+          ],
+          onFilter: (value, record) => record.level.indexOf(value) === 0
         },
         {
           title: 'STYLE',
@@ -49,17 +84,21 @@ const ProfileTable = () => (
           dataIndex: 'age',
           align: 'right'
         },
-        {
-          title: 'JOB',
-          dataIndex: 'age',
-          align: 'right'
-        },
+        // {
+        //   title: 'JOB',
+        //   dataIndex: 'age',
+        //   align: 'right'
+        // },
         {
           title: 'FAVORITE TEAM',
           dataIndex: 'favoriteTeam',
           align: 'right'
         }
       ]
+
+      function onChange(pagination, filters, sorter) {
+        console.log('params', pagination, filters, sorter)
+      }
       return (
         <div>
           <div>
@@ -71,10 +110,12 @@ const ProfileTable = () => (
             </h3>
           </div>
           <Table
+            style={{ marginBottom: -10 }}
             columns={columns}
             rowKey={record => record._id}
             dataSource={data.getAllProfiles}
             size="middle"
+            onChange={onChange}
           />
         </div>
       )
