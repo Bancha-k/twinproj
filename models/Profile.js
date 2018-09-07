@@ -7,8 +7,8 @@ const ProfileSchema = new Schema({
   selectedTime: { type: String, required: true },
   level: { type: String, required: true },
   style: { type: String, required: true },
-  age: { type: String, required: true },
   favoriteTeam: { type: String, required: true },
+  age: { type: String, required: true },
   matched: { type: Boolean, required: true },
   clearState: { type: Boolean, required: true },
   recordDate: { type: Date, default: Date.now }

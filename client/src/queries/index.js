@@ -18,10 +18,27 @@ export const GET_ALL_PROFILES = gql`
   }
 `
 
-export const SIGNUP_USER = gql`
-  mutation($username: String!, $password: String!, $email: String!) {
-    signupUser(username: $username, password: $password, email: $email) {
-      token
+export const ADD_PROFILE = gql`
+  mutation(
+    $fullName: String!
+    $stadium: String!
+    $selectedTime: String!
+    $level: String!
+    $style: String!
+    $favoriteTeam: String!
+    $age: String!
+  ) {
+    addProfile(
+      fullName: $fullName
+      stadium: $stadium
+      selectedTime: $selectedTime
+      level: $level
+      style: $style
+      favoriteTeam: $favoriteTeam
+      age: $age
+    ) {
+      _id
+      fullName
     }
   }
 `

@@ -1,4 +1,3 @@
-
 exports.resolvers = {
   Query: {
     getAllProfiles: async (root, args, { Profile }) => {
@@ -9,13 +8,7 @@ exports.resolvers = {
   Mutation: {
     addProfile: async (
       root,
-      { fullName,
-        stadium,
-        selectedTime,
-        level,
-        style,
-        age,
-        favoriteTeam },
+      { fullName, stadium, selectedTime, level, style, favoriteTeam, age },
       { Profile }
     ) => {
       const newProfile = await new Profile({
@@ -24,8 +17,8 @@ exports.resolvers = {
         selectedTime,
         level,
         style,
-        age,
         favoriteTeam,
+        age,
         matched: false,
         clearState: false,
         recordDate: new Date()

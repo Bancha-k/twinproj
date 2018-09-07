@@ -7,8 +7,8 @@ exports.typeDefs = `
         selectedTime: String!
         level: String!
         style: String!
-        age: String!
         favoriteTeam: String!
+        age: String!
         matched: Boolean
         clearState: Boolean
         recordDate: String!
@@ -25,8 +25,8 @@ exports.typeDefs = `
             selectedTime: String!,
             level: String!,
             style: String!,
-            age: String!,
-            favoriteTeam: String!): Profile
+            favoriteTeam: String!
+            age: String!): Profile
     }
 
 `

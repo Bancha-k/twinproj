@@ -23,7 +23,14 @@ const App = props => {
         overflow: 'auto'
       }}
     >
-      <div style={{ flex: 1, position: 'relative', height: '100px' }}>
+      <div
+        style={{
+          flex: 1,
+          position: 'relative',
+          height: '100px',
+          marginTop: 50
+        }}
+      >
         <img
           src={logoSrc}
           style={{
@@ -43,7 +50,12 @@ const App = props => {
           textColor: 'white'
         }}
       >
-        <Row gutter={24} align="center" justify="center">
+        <Row
+          gutter={24}
+          align="center"
+          justify="center"
+          style={{ marginTop: 50 }}
+        >
           <Col sm={12} align="center" justify="center">
             <img src={fieldSrc} style={{ marginBottom: '40px' }} />
           </Col>
