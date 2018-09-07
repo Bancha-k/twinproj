@@ -11,27 +11,14 @@ const FormItem = Form.Item
 const Option = Select.Option
 
 class FormInput extends React.Component {
-  // handleSubmit = e => {
-  //   e.preventDefault()
-  //   this.props.form.validateFields((err, values) => {
-  //     if (!err) {
-  //       addProfile({ variables: {} })
-  //       // console.log('Received values of form: ', values)
-  //       // alert('Received values of form: ', values.fullName)
-  //     }
-  //   })
-  // }
-
-  // handleSelectChange = value => {
-  //   console.log(value)
-  // }
-
   handleReset = () => {
     this.props.form.resetFields()
   }
 
   render() {
     const { getFieldDecorator } = this.props.form
+    // const { dataList, fullplayer } = this.state
+    const { action } = this.props
     return (
       <Mutation mutation={ADD_PROFILE}>
         {(addProfile, { error, data }) => (
@@ -51,8 +38,12 @@ class FormInput extends React.Component {
                       favoriteTeam: values.favoriteTeam
                     }
                   }).then(data => {
-                    const result = dataAnalyte(data.data.addProfile)
-                    console.log(result)
+                    if (data.data.addProfile == null) {
+                      this.setState({ fullplayer: true })
+                    } else {
+                      const result = dataAnalyte(data.data.addProfile)
+                      action(result)
+                    }
                   })
                   notification['success']({
                     message: 'Successfully Adding',

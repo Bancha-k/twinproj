@@ -24,7 +24,7 @@ exports.resolvers = {
       })
       if (checkFull.length === 14) {
         console.log('unavaliable ' + checkFull.length)
-        return checkFull
+        // return checkFull
       } else {
         console.log('avaliable ' + checkFull.length)
         await new Profile({
@@ -45,6 +45,14 @@ exports.resolvers = {
           selectedTime: selectedTime,
           matched: false
         })
+
+        await newCheckFull.map(val => {
+          Profile.update(
+            { fullName: val.fullName },
+            { $set: { matched: true } }
+          )
+        })
+
         return newCheckFull
       }
     }
