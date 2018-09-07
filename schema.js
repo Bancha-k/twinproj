@@ -15,6 +15,7 @@ exports.typeDefs = `
     }
 
     type Query {
+        searchProfilesByName (fullName: String!): [Profile]
         getAllProfiles: [Profile]
     }
 
@@ -26,7 +27,7 @@ exports.typeDefs = `
             level: String!,
             style: String!,
             favoriteTeam: String!
-            age: String!): Profile
+            age: String!): [Profile]
     }
 
 `

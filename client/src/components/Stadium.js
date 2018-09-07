@@ -10,7 +10,8 @@ import {
   Col,
   Form,
   Button,
-  Select
+  Select,
+  Table
 } from 'antd'
 import './Stadium.css'
 
@@ -34,6 +35,18 @@ class Stadium extends React.Component {
   }
 
   render() {
+    const columns = [
+      {
+        title: 'NUMBER',
+        dataIndex: 'recordDate',
+        align: 'left'
+      },
+      {
+        title: 'PLAYER',
+        dataIndex: 'fullName',
+        align: 'left'
+      }
+    ]
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
@@ -138,7 +151,16 @@ class Stadium extends React.Component {
                   background: '#fff',
                   minHeight: 500
                 }}
-              />
+              >
+                <h3 style={{ marginLeft: 15, color: 'rgb(62, 200, 195)' }}>
+                  TEAM A
+                </h3>
+                <Table
+                  style={{ marginTop: 30 }}
+                  columns={columns}
+                  size="small"
+                />
+              </Content>
             </Col>
             <Col span={8}>
               <Content
@@ -148,7 +170,17 @@ class Stadium extends React.Component {
                   background: '#fff',
                   minHeight: 500
                 }}
-              />
+              >
+                <h3 style={{ marginLeft: 15, color: 'rgb(62, 200, 195)' }}>
+                  TEAM B
+                </h3>
+
+                <Table
+                  style={{ marginTop: 30 }}
+                  columns={columns}
+                  size="small"
+                />
+              </Content>
             </Col>
           </Row>
 

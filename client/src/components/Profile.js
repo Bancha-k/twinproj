@@ -1,5 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { Query } from 'react-apollo'
+
+import { SEARCH_PROFILES_BY_NAME } from '../queries'
 
 import { Layout, Menu, Icon, Dropdown, Input } from 'antd'
 import './Profile.css'
@@ -10,7 +13,8 @@ const { Header, Sider, Content, Footer } = Layout
 
 class Profile extends React.Component {
   state = {
-    collapsed: false
+    collapsed: false,
+    searchByName: ''
   }
 
   toggle = () => {
@@ -61,10 +65,13 @@ class Profile extends React.Component {
                 <Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />
               }
               size="large"
-              placeholder=" Search Profile"
+              placeholder=" Search By Name"
               style={{
                 width: 400,
                 background: '#ffffff'
+              }}
+              onChange={event => {
+                this.setState({ searchByName: event.target.value })
               }}
             />
 
@@ -95,7 +102,14 @@ class Profile extends React.Component {
               background: '#fff'
             }}
           >
-            <ProfileTable />
+            <Query
+              query={SEARCH_PROFILES_BY_NAME}
+              variables={{ fullName: this.state.searchByName }}
+            >
+              {({ loading, error, data }) => {
+                return <ProfileTable dataSearch={data.searchProfilesByName} />
+              }}
+            </Query>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             © Matching AI Team 2018. All Rights Reserved.

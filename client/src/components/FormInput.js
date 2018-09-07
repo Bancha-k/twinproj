@@ -2,6 +2,8 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 import { ADD_PROFILE } from '../queries'
 
+import dataAnalyte from '../lib/dataAnalyte'
+
 import { Form, Select, Input, Button, notification } from 'antd'
 
 const FormItem = Form.Item
@@ -32,7 +34,7 @@ class FormInput extends React.Component {
     const { getFieldDecorator } = this.props.form
     return (
       <Mutation mutation={ADD_PROFILE}>
-        {(addProfile, { data }) => (
+        {(addProfile, { error, data }) => (
           <Form
             onSubmit={e => {
               e.preventDefault()
@@ -48,12 +50,15 @@ class FormInput extends React.Component {
                       age: values.age,
                       favoriteTeam: values.favoriteTeam
                     }
+                  }).then(data => {
+                    const result = dataAnalyte(data.data.addProfile)
+                    console.log(result)
                   })
                   notification['success']({
                     message: 'Successfully Adding',
                     description: `${values.fullname}`
                   })
-                  this.props.form.resetFields()
+                  // this.props.form.resetFields()
                 }
               })
             }}

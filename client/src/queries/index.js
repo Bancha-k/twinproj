@@ -1,5 +1,23 @@
 import { gql } from 'apollo-boost'
 
+export const SEARCH_PROFILES_BY_NAME = gql`
+  query($fullName: String!) {
+    searchProfilesByName(fullName: $fullName) {
+      _id
+      fullName
+      selectedTime
+      level
+      stadium
+      style
+      age
+      favoriteTeam
+      matched
+      clearState
+      recordDate
+    }
+  }
+`
+
 export const GET_ALL_PROFILES = gql`
   {
     getAllProfiles {
@@ -39,6 +57,15 @@ export const ADD_PROFILE = gql`
     ) {
       _id
       fullName
+      stadium
+      selectedTime
+      level
+      style
+      favoriteTeam
+      age
+      matched
+      clearState
+      recordDate
     }
   }
 `

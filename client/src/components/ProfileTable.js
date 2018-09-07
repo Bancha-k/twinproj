@@ -5,10 +5,9 @@ import Moment from 'react-moment'
 import { Table, Icon } from 'antd'
 import { GET_ALL_PROFILES } from '../queries'
 
-const ProfileTable = () => (
+const ProfileTable = props => (
   <Query query={GET_ALL_PROFILES}>
     {({ loading, error, data }) => {
-      // const AllProfilesLength = data.getAllProfiles.length
       const columns = [
         {
           title: 'CREATED DATE',
@@ -106,14 +105,16 @@ const ProfileTable = () => (
             <h2>Profile Detail</h2>{' '}
             <h3 style={{ float: 'right', marginRight: 40, marginTop: -45 }}>
               <Icon type="user" style={{ fontSize: 25, color: '#3EC8C3' }} />{' '}
-              Total:
+              Total: ?
             </h3>
           </div>
           <Table
             style={{ marginBottom: -10 }}
             columns={columns}
             rowKey={record => record._id}
-            dataSource={data.getAllProfiles}
+            dataSource={
+              props.dataSearch ? props.dataSearch : data.getAllProfiles
+            }
             size="middle"
             onChange={onChange}
           />

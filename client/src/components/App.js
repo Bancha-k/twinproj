@@ -41,6 +41,7 @@ const App = props => {
             right: 0,
             bottom: 0
           }}
+          alt="logo"
         />
       </div>
       <div
@@ -57,7 +58,11 @@ const App = props => {
           style={{ marginTop: 50 }}
         >
           <Col sm={12} align="center" justify="center">
-            <img src={fieldSrc} style={{ marginBottom: '40px' }} />
+            <img
+              src={fieldSrc}
+              style={{ marginBottom: '40px' }}
+              alt="Field Source"
+            />
           </Col>
           <Col sm={12}>
             <FormInput />
