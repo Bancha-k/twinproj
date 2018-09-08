@@ -1,8 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { Query } from 'react-apollo'
-import { GET_PLAYER } from '../queries'
+import { Query, Mutation } from 'react-apollo'
+import { GET_PLAYER, CLEAR_PLAYER } from '../queries'
 
 import {
   Layout,
@@ -39,10 +39,6 @@ class Stadium extends React.Component {
     this.props.history.push(path)
   }
 
-  handleReset = () => {
-    console.log('clear')
-  }
-
   render() {
     const { getFieldDecorator } = this.props.form
     const { selectStadium, selectTime } = this.state
@@ -52,24 +48,6 @@ class Stadium extends React.Component {
         dataIndex: 'fullName',
         align: 'center'
       }
-      // {
-      //   title: 'TEAM',
-      //   dataIndex: 'team',
-      //   align: 'center',
-      //   width: 200,
-      //   filters: [
-      //     {
-      //       text: 'TEAM A',
-      //       value: 'A'
-      //     },
-      //     {
-      //       text: 'TEAM B',
-      //       value: 'B'
-      //     }
-      //   ],
-      //   filterMultiple: false,
-      //   onFilter: (value, record) => record.team.indexOf(value) === 0
-      // }
     ]
     function onChange(sorter) {
       console.log('params', sorter)
@@ -236,18 +214,34 @@ class Stadium extends React.Component {
               >
                 <h3 style={{ marginLeft: 15, color: 'rgb(62, 200, 195)' }}>
                   PLATER LIST
-                  <Button
-                    icon="sync"
-                    style={{
-                      marginLeft: 8,
-                      backgroundColor: '#e20303',
-                      color: 'white',
-                      float: 'right'
+                  <Mutation mutation={CLEAR_PLAYER}>
+                    {(clearSelectedTeam, { loading, error, data }) => {
+                      return (
+                        <Button
+                          icon="sync"
+                          style={{
+                            marginLeft: 8,
+                            backgroundColor: '#e20303',
+                            color: 'white',
+                            float: 'right'
+                          }}
+                          onClick={() => {
+                            clearSelectedTeam({
+                              variables: {
+                                stadium: selectStadium,
+                                selectedTime: selectTime
+                              }
+                            }).then(() => {
+                              alert('Stadium Has Avaliable now.')
+                              window.location.reload()
+                            })
+                          }}
+                        >
+                          Clear
+                        </Button>
+                      )
                     }}
-                    onClick={this.handleClear}
-                  >
-                    Clear
-                  </Button>
+                  </Mutation>
                 </h3>
 
                 <Query
