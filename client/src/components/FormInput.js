@@ -2,7 +2,7 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 import { ADD_PROFILE } from '../queries'
 
-import dataAnalyte from '../lib/dataAnalyte'
+import dataAnalyze from '../lib/dataAnalyze'
 
 import { Form, Select, Input, Button, notification } from 'antd'
 
@@ -45,7 +45,7 @@ class FormInput extends React.Component {
                         description: 'Cannot Match'
                       })
                     } else {
-                      const result = data.data.addProfile.length > 13 ? dataAnalyte(data.data.addProfile) : data.data.addProfile
+                      const result = data.data.addProfile.length > 13 ? dataAnalyze(data.data.addProfile) : data.data.addProfile
                       action(result)
                       notification['success']({
                         message: 'Successfully Adding',
