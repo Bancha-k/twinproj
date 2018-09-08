@@ -12,14 +12,22 @@ export class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      teamMatched: []
+      teamMatched: [],
+      inform: []
     }
 
     this.getData = this.getData.bind(this)
+    this.getInform = this.getInform.bind(this)
   }
   getData(val) {
     this.setState({
       teamMatched: val
+    })
+  }
+
+  getInform(val) {
+    this.setState({
+      inform: val
     })
   }
 
@@ -28,7 +36,7 @@ export class App extends React.Component {
   }
 
   render() {
-    const { teamMatched } = this.state
+    const { teamMatched, inform } = this.state
 
     const teamA = []
     const teamB = []
@@ -95,7 +103,7 @@ export class App extends React.Component {
                     color: 'white'
                   }}
                 >
-                  Stadium : xxxx
+                  Stadium : {inform.stadium}
                 </h2>
               </Col>
               <Col sm={12} style={{ flex: 1 }}>
@@ -107,7 +115,7 @@ export class App extends React.Component {
                     color: 'white'
                   }}
                 >
-                  Time : xxxx
+                  Time : {inform.time}
                 </h2>
               </Col>
               <Col sm={4} />
@@ -162,7 +170,7 @@ export class App extends React.Component {
               <Col sm={4} />
             </Col>
             <Col sm={12} align="center" justify="center">
-              <FormInput action={this.getData} />{' '}
+              <FormInput action={this.getData} detail={this.getInform} />{' '}
               <Button
                 type="default"
                 icon="area-chart"
