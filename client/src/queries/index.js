@@ -46,6 +46,16 @@ export const GET_PLAYER = gql`
   }
 `
 
+export const CLEAR_PLAYER = gql`
+  mutation($stadium: String!, $selectedTime: String!) {
+    clearSelectedTeam(stadium: $stadium, selectedTime: $selectedTime) {
+      _id
+      fullName
+      team
+    }
+  }
+`
+
 export const ADD_PROFILE = gql`
   mutation(
     $fullName: String!

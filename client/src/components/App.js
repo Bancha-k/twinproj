@@ -82,7 +82,7 @@ export class App extends React.Component {
         </div>
         <div
           style={{
-            margin: '24px 20px 0',
+            margin: '100px 20px 0',
             overflow: 'initial',
             textColor: 'white',
             marginBottom: '50px'
@@ -188,8 +188,7 @@ export class App extends React.Component {
                       />
                     )}
                 </div>
-              </Col>
-              <Col sm={4} />
+              )}
             </Col>
             <Col sm={12} align="center" justify="center">
               <FormInput action={this.getData} detail={this.getInform} />{' '}
@@ -197,7 +196,6 @@ export class App extends React.Component {
                 type="default"
                 icon="area-chart"
                 style={{
-                  // marginLeft: '270px',
                   opacity: 0.3,
                   backgroundColor: '#000000',
                   color: '#fff'

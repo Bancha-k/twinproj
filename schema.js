@@ -2,7 +2,7 @@ exports.typeDefs = `
 
     type Profile {
         _id: ID!
-        fullName: String!
+        fullName: String! @unique
         stadium: String!
         selectedTime: String!
         level: String!
@@ -19,6 +19,7 @@ exports.typeDefs = `
         searchProfilesByName (fullName: String!): [Profile]
         getAllProfiles: [Profile]
         getSelectedTeam(stadium: String!, selectedTime: String!) : [Profile]
+        
     }
 
     type Mutation {
@@ -30,6 +31,7 @@ exports.typeDefs = `
             style: String!,
             favoriteTeam: String!
             age: String!): [Profile]
+        clearSelectedTeam(stadium: String!, selectedTime: String!) : [Profile]
     }
 
 `

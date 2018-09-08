@@ -44,12 +44,14 @@ const setTeam = data => {
   })
   let team = false
   for (let i = 0; i < 13; i++) {
-    result.push({
-      fullName: arr[i].fullName,
-      data: arr[i].data,
-      team: team ? 'A' : 'B'
-    })
-    team = team ? false : true
+    if (arr[i]) {
+      result.push({
+        fullName: arr[i].fullName,
+        data: arr[i].data,
+        team: team ? 'A' : 'B'
+      })
+      team = team ? false : true
+    }
   }
   return result
 }
