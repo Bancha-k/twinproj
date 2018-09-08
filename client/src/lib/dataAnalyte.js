@@ -3,7 +3,7 @@
  * @Email: comdevx@gmail.com 
  * @Date: 2018-09-03 23:56:35 
  * @Last Modified by: ComdevX
- * @Last Modified time: 2018-09-08 17:43:03
+ * @Last Modified time: 2018-09-08 22:47:14
  */
 
 import _ from 'lodash'
@@ -44,12 +44,14 @@ const setTeam = data => {
   })
   let team = false
   for (let i = 0; i < 13; i++) {
-    result.push({
-      fullName: arr[i].fullName,
-      data: arr[i].data,
-      team: team ? 'A' : 'B'
-    })
-    team = team ? false : true
+    if (arr[i]) {
+      result.push({
+        fullName: arr[i].fullName,
+        data: arr[i].data,
+        team: team ? 'A' : 'B'
+      })
+      team = team ? false : true
+    }
   }
   return result
 }
