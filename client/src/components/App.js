@@ -12,16 +12,17 @@ export class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      teamMatched: [],
-      inform: []
+      list: [],
+      inform: {}
     }
 
     this.getData = this.getData.bind(this)
     this.getInform = this.getInform.bind(this)
   }
+
   getData(val) {
     this.setState({
-      teamMatched: val
+      list: val
     })
   }
 
@@ -36,12 +37,12 @@ export class App extends React.Component {
   }
 
   render() {
-    const { teamMatched, inform } = this.state
+    const { list, inform } = this.state
 
     const teamA = []
     const teamB = []
 
-    teamMatched.forEach(val => {
+    list.forEach(val => {
       if (val.team === 'A') {
         teamA.push(val.fullName)
       } else if (val.team === 'B') {
@@ -94,37 +95,44 @@ export class App extends React.Component {
             style={{ marginTop: 50 }}
           >
             <Col sm={12} align="center" justify="center">
-              {this.state.teamMatched.length !== 0 && (
-                <div>
-                  <Col sm={12} style={{ flex: 1 }}>
-                    <h2
-                      className="ant-form-label"
-                      style={{
-                        textAlign: 'center',
-                        color: 'white'
-                      }}
-                    >
-                      Stadium : {inform.stadium}
-                    </h2>
-                  </Col>
-                  <Col sm={12} style={{ flex: 1 }}>
-                    <h2
-                      className="ant-form-label"
-                      style={{
-                        textAlign: 'center',
-                        color: 'white'
-                      }}
-                    >
-                      Time : {inform.time}
-                    </h2>
-                  </Col>
-                  <Col sm={4} />
-                  <Col sm={16}>
-                    <div
-                      style={{
-                        flex: 1
-                      }}
-                    >
+              <Col sm={12} style={{ flex: 1 }}>
+                <h2
+                  className="ant-form-label"
+                  style={{
+                    textAlign: 'center',
+                    // marginBottom: 0,
+                    color: 'white'
+                  }}
+                >
+                  Stadium : {inform.stadium}
+                </h2>
+              </Col>
+              <Col sm={12} style={{ flex: 1 }}>
+                <h2
+                  className="ant-form-label"
+                  style={{
+                    textAlign: 'center',
+                    // marginBottom: 0,
+                    color: 'white'
+                  }}
+                >
+                  Time : {inform.time}
+                </h2>
+              </Col>
+              <Col sm={4} />
+              <Col sm={16}>
+                <div
+                  style={{
+                    flex: 1,
+                    height: '700px',
+                    backgroundImage: `url(${fieldSrc})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  {teamA.length > 0 ? (
+                    <div>
                       <List
                         style={{
                           flex: 1,
@@ -132,17 +140,14 @@ export class App extends React.Component {
                           fontSize: 15,
                           width: 'auto',
                           opacity: 0.8,
-                          backgroundColor: '#447a3a',
-                          maxWidth: '520px',
-                          border: '1px solid #000;'
+                          maxWidth: '520px'
                         }}
                         size="small"
                         header={<div>Team A</div>}
+                        bordered={false}
                         dataSource={teamA}
                         renderItem={item => (
-                          <List.Item style={{ paddingLeft: 50 }}>
-                            {item}
-                          </List.Item>
+                          <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
                         )}
                       />
                       <List
@@ -152,22 +157,36 @@ export class App extends React.Component {
                           fontSize: 15,
                           width: 'auto',
                           opacity: 0.8,
-                          backgroundColor: '#447a3a',
                           maxWidth: '520px'
                         }}
                         size="small"
                         header={<div>Team B</div>}
+                        bordered={false}
                         dataSource={teamB}
                         renderItem={item => (
-                          <List.Item style={{ paddingLeft: 50 }}>
-                            {item}
-                          </List.Item>
+                          <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
                         )}
                       />
-                      <br />
                     </div>
-                  </Col>
-                  <Col sm={4} />
+                  ) : (
+                      <List
+                        style={{
+                          flex: 1,
+                          color: '#fff',
+                          fontSize: 15,
+                          width: 'auto',
+                          opacity: 0.8,
+                          maxWidth: '520px'
+                        }}
+                        size="small"
+                        header={<div>List</div>}
+                        bordered={false}
+                        dataSource={list}
+                        renderItem={item => (
+                          <List.Item style={{ paddingLeft: 50 }}>{item.fullName}</List.Item>
+                        )}
+                      />
+                    )}
                 </div>
               )}
             </Col>
