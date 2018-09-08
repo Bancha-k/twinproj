@@ -47,7 +47,7 @@ class FormInput extends React.Component {
                       })
                       // this.props.form.resetFields()
                     } else {
-                      const result = dataAnalyte(data.data.addProfile)
+                      const result = data.data.addProfile.length === 14 ? dataAnalyte(data.data.addProfile) : data.data.addProfile
                       action(result)
                       notification['success']({
                         message: 'Successfully Adding',
@@ -81,7 +81,7 @@ class FormInput extends React.Component {
               })(
                 <Select
                   placeholder="Select a Stadium"
-                  // onChange={this.handleSelectChange}
+                // onChange={this.handleSelectChange}
                 >
                   <Option value="Stadium 1">Stadium 1</Option>
                   <Option value="Stadium 2">Stadium 2</Option>
@@ -99,7 +99,7 @@ class FormInput extends React.Component {
               })(
                 <Select
                   placeholder="Select a Time"
-                  // onChange={this.handleSelectChange}
+                // onChange={this.handleSelectChange}
                 >
                   <Option value="Morning">Morning</Option>
                   <Option value="Afternoon">Afternoon</Option>
@@ -129,7 +129,7 @@ class FormInput extends React.Component {
               })(
                 <Select
                   placeholder="Select a Level"
-                  // onChange={this.handleSelectChange}
+                // onChange={this.handleSelectChange}
                 >
                   <Option value="High">High</Option>
                   <Option value="Medium">Medium</Option>
@@ -147,7 +147,7 @@ class FormInput extends React.Component {
               })(
                 <Select
                   placeholder="Select a Style"
-                  // onChange={this.handleSelectChange}
+                // onChange={this.handleSelectChange}
                 >
                   <Option value="Passing">Passing</Option>
                   <Option value="High Speed">High Speed</Option>
@@ -173,7 +173,7 @@ class FormInput extends React.Component {
               })(
                 <Select
                   placeholder="Select a Team"
-                  // onChange={this.handleSelectChange}
+                // onChange={this.handleSelectChange}
                 >
                   <Option value="Real Madrid">Real Madrid</Option>
                   <Option value="Barcelona">Barcelona</Option>
@@ -198,7 +198,7 @@ class FormInput extends React.Component {
               })(
                 <Select
                   placeholder="Select a Age"
-                  // onChange={this.handleSelectChange}
+                // onChange={this.handleSelectChange}
                 >
                   <Option value="Student">Student</Option>
                   <Option value="University">University</Option>

@@ -3,17 +3,19 @@
  * @Email: comdevx@gmail.com 
  * @Date: 2018-09-03 23:56:35 
  * @Last Modified by: ComdevX
- * @Last Modified time: 2018-09-06 02:19:21
+ * @Last Modified time: 2018-09-08 15:00:04
  */
 
 import _ from 'lodash'
 
 export default data => {
   const newData = []
-
-  data.map(val => {
+  data.forEach(val => {
     const data = [val.level, val.style, val.age, val.favoriteTeam]
-    const editData = { fullName: val.fullName, data: data }
+    const editData = {
+      fullName: val.fullName,
+      data: data
+    }
 
     newData.push(editData)
   })

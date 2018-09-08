@@ -45,7 +45,6 @@ exports.resolvers = {
           matched: false,
           clearState: false,
           recordDate: new Date(),
-          team: ''
         }).save()
 
         const newCheckFull = await Profile.find({

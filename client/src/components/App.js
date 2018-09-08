@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import { Row, Col, List, Button } from 'antd'
 import FormInput from './FormInput'
+import TextArea from 'antd/lib/input/TextArea'
 
 const bgSrc = require(`../assets/matchkickoff_bg.png`)
 const logoSrc = require(`../assets/logo@72x.png`)
@@ -12,7 +13,7 @@ export class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      teamMatched: ''
+      teamMatched: []
     }
 
     this.getData = this.getData.bind(this)
@@ -29,18 +30,7 @@ export class App extends React.Component {
 
   render() {
     const { teamMatched } = this.state
-
-    const teamA = []
-    const teamB = []
-
-    for (let i = 0; i < teamMatched.length; i++) {
-      if (teamMatched[i].team === 'A') {
-        teamA.push(teamMatched[i].fullName)
-      } else if (teamMatched[i].team === 'B') {
-        teamB.push(teamMatched[i].fullName)
-      }
-    }
-
+    
     return (
       <div
         style={{
@@ -91,11 +81,6 @@ export class App extends React.Component {
             style={{ marginTop: 50 }}
           >
             <Col sm={12} align="center" justify="center">
-              {/* <img
-              src={fieldSrc}
-              style={{ marginBottom: '40px' }}
-              alt="Field Source"
-            /> */}
               <div>
                 <List
                   style={{
@@ -106,15 +91,15 @@ export class App extends React.Component {
                     opacity: 0.8
                   }}
                   size="small"
-                  header={<div>Team A</div>}
+                  // header={<div>Team A</div>}
                   bordered={false}
-                  dataSource={teamA}
+                  dataSource={teamMatched}
                   renderItem={item => (
-                    <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
+                    <List.Item style={{ paddingLeft: 50 }}>{item.fullName}</List.Item>
                   )}
                 />
                 <br />
-                <List
+                {/* <List
                   style={{
                     color: '#fff',
                     fontSize: 15,
@@ -129,7 +114,7 @@ export class App extends React.Component {
                   renderItem={item => (
                     <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
                   )}
-                />
+                /> */}
               </div>
             </Col>
             <Col sm={12}>
