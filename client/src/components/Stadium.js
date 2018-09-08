@@ -1,6 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
+import { Query } from 'react-apollo'
+import { GET_PLAYER } from '../queries'
+
 import {
   Layout,
   Menu,
@@ -21,7 +24,9 @@ const Option = Select.Option
 
 class Stadium extends React.Component {
   state = {
-    collapsed: false
+    collapsed: false,
+    selectStadium: '',
+    selectTime: ''
   }
 
   toggle = () => {
@@ -34,19 +39,41 @@ class Stadium extends React.Component {
     this.props.history.push(path)
   }
 
+  handleReset = () => {
+    console.log('clear')
+  }
+
   render() {
+    const { getFieldDecorator } = this.props.form
+    const { selectStadium, selectTime } = this.state
     const columns = [
-      {
-        title: 'NUMBER',
-        dataIndex: 'recordDate',
-        align: 'left'
-      },
       {
         title: 'PLAYER',
         dataIndex: 'fullName',
-        align: 'left'
+        align: 'center'
       }
+      // {
+      //   title: 'TEAM',
+      //   dataIndex: 'team',
+      //   align: 'center',
+      //   width: 200,
+      //   filters: [
+      //     {
+      //       text: 'TEAM A',
+      //       value: 'A'
+      //     },
+      //     {
+      //       text: 'TEAM B',
+      //       value: 'B'
+      //     }
+      //   ],
+      //   filterMultiple: false,
+      //   onFilter: (value, record) => record.team.indexOf(value) === 0
+      // }
     ]
+    function onChange(sorter) {
+      console.log('params', sorter)
+    }
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
@@ -80,6 +107,15 @@ class Stadium extends React.Component {
             />
 
             <div style={{ float: 'right', marginRight: 30 }}>
+              <Button
+                type="default"
+                icon="home"
+                style={{ marginRight: 20 }}
+                onClick={() => this.nextPath('/')}
+              >
+                Homepage
+              </Button>
+
               <Dropdown
                 overlay={
                   <Menu>
@@ -110,40 +146,67 @@ class Stadium extends React.Component {
                 }}
               >
                 <h3 style={{ marginLeft: 15 }}>Stadium Management</h3>
-                <Form>
+                <Form
+                  onSubmit={e => {
+                    e.preventDefault()
+                    this.props.form.validateFields((err, values) => {
+                      if (!err) {
+                        this.setState({ selectStadium: values.stadium })
+                        this.setState({ selectTime: values.time })
+                      }
+                    })
+                  }}
+                >
                   <FormItem
                     label="Stadium"
                     labelCol={{ span: 5 }}
                     wrapperCol={{ span: 14 }}
                     style={{ marginTop: 30 }}
                   >
-                    <Select placeholder="Select Stadium" style={{ width: 300 }}>
-                      <Option value="Stadium 1">Stadium 1</Option>
-                      <Option value="Stadium 2">Stadium 2</Option>
-                      <Option value="Stadium 3">Stadium 3</Option>
-                    </Select>
+                    {getFieldDecorator('stadium', {
+                      rules: [
+                        { required: true, message: 'Please select Stadium!' }
+                      ]
+                    })(
+                      <Select
+                        placeholder="Select Stadium"
+                        style={{ width: 300 }}
+                      >
+                        <Option value="Stadium 1">Stadium 1</Option>
+                        <Option value="Stadium 2">Stadium 2</Option>
+                        <Option value="Stadium 3">Stadium 3</Option>
+                      </Select>
+                    )}
                   </FormItem>
                   <FormItem
                     label="Time"
                     labelCol={{ span: 5 }}
                     wrapperCol={{ span: 14 }}
                   >
-                    <Select placeholder="Select Time" style={{ width: 300 }}>
-                      <Option value="Morning">Morning</Option>
-                      <Option value="Afternoon">Afternoon</Option>
-                      <Option value="Evening">Evening</Option>
-                    </Select>
+                    {getFieldDecorator('time', {
+                      rules: [
+                        { required: true, message: 'Please select Time!' }
+                      ]
+                    })(
+                      <Select placeholder="Select Time" style={{ width: 300 }}>
+                        <Option value="Morning">Morning</Option>
+                        <Option value="Afternoon">Afternoon</Option>
+                        <Option value="Evening">Evening</Option>
+                      </Select>
+                    )}
                   </FormItem>
                   <FormItem
                     wrapperCol={{ span: 14, offset: 5 }}
                     style={{ marginBottom: 0 }}
                   >
-                    <Button type="primary">Find</Button>
+                    <Button type="primary" htmlType="submit">
+                      Find
+                    </Button>
                   </FormItem>
                 </Form>
               </Content>
             </Col>
-            <Col span={8}>
+            {/* <Col span={8}>
               <Content
                 style={{
                   marginRight: '24px',
@@ -158,11 +221,11 @@ class Stadium extends React.Component {
                 <Table
                   style={{ marginTop: 30 }}
                   columns={columns}
-                  size="small"
+                  size="middle"
                 />
               </Content>
-            </Col>
-            <Col span={8}>
+            </Col> */}
+            <Col span={16}>
               <Content
                 style={{
                   marginRight: '24px',
@@ -172,14 +235,42 @@ class Stadium extends React.Component {
                 }}
               >
                 <h3 style={{ marginLeft: 15, color: 'rgb(62, 200, 195)' }}>
-                  TEAM B
+                  PLATER LIST
+                  <Button
+                    icon="sync"
+                    style={{
+                      marginLeft: 8,
+                      backgroundColor: '#e20303',
+                      color: 'white',
+                      float: 'right'
+                    }}
+                    onClick={this.handleClear}
+                  >
+                    Clear
+                  </Button>
                 </h3>
 
-                <Table
-                  style={{ marginTop: 30 }}
-                  columns={columns}
-                  size="small"
-                />
+                <Query
+                  query={GET_PLAYER}
+                  variables={{
+                    stadium: selectStadium,
+                    selectedTime: selectTime
+                  }}
+                >
+                  {({ loading, error, data }) => {
+                    return (
+                      <Table
+                        style={{ marginTop: 30 }}
+                        columns={columns}
+                        size="middle"
+                        dataSource={data.getSelectedTeam}
+                        rowKey={record => record._id}
+                        pagination={false}
+                        onChange={onChange}
+                      />
+                    )
+                  }}
+                </Query>
               </Content>
             </Col>
           </Row>
@@ -193,4 +284,4 @@ class Stadium extends React.Component {
   }
 }
 
-export default withRouter(Stadium)
+export default withRouter(Form.create()(Stadium))

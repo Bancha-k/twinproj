@@ -9,6 +9,13 @@ exports.resolvers = {
     getAllProfiles: async (root, args, { Profile }) => {
       const allProfiles = await Profile.find()
       return allProfiles
+    },
+    getSelectedTeam: async (root, args, { Profile }) => {
+      const allPlayer = await Profile.find({
+        stadium: args.stadium,
+        selectedTime: args.selectedTime
+      })
+      return allPlayer
     }
   },
   Mutation: {
@@ -37,7 +44,8 @@ exports.resolvers = {
           age,
           matched: false,
           clearState: false,
-          recordDate: new Date()
+          recordDate: new Date(),
+          team: ''
         }).save()
 
         const newCheckFull = await Profile.find({

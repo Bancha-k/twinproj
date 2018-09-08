@@ -1,6 +1,7 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-import { Row, Col, List } from 'antd'
+import { Row, Col, List, Button } from 'antd'
 import FormInput from './FormInput'
 
 const bgSrc = require(`../assets/matchkickoff_bg.png`)
@@ -20,6 +21,10 @@ export class App extends React.Component {
     this.setState({
       teamMatched: val
     })
+  }
+
+  nextPath(path) {
+    this.props.history.push(path)
   }
 
   render() {
@@ -128,7 +133,20 @@ export class App extends React.Component {
               </div>
             </Col>
             <Col sm={12}>
-              <FormInput action={this.getData} />
+              <FormInput action={this.getData} />{' '}
+              <Button
+                type="default"
+                icon="area-chart"
+                style={{
+                  marginLeft: 265,
+                  opacity: 0.3,
+                  backgroundColor: '#000000',
+                  color: '#fff'
+                }}
+                onClick={() => this.nextPath('/profile')}
+              >
+                Profile
+              </Button>
             </Col>
           </Row>
         </div>
@@ -137,4 +155,4 @@ export class App extends React.Component {
   }
 }
 
-export default App
+export default withRouter(App)

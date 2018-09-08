@@ -12,11 +12,13 @@ exports.typeDefs = `
         matched: Boolean
         clearState: Boolean
         recordDate: String!
+        team: String
     }
 
     type Query {
         searchProfilesByName (fullName: String!): [Profile]
         getAllProfiles: [Profile]
+        getSelectedTeam(stadium: String!, selectedTime: String!) : [Profile]
     }
 
     type Mutation {

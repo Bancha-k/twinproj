@@ -40,16 +40,22 @@ class FormInput extends React.Component {
                   }).then(data => {
                     if (data.data.addProfile == null) {
                       this.setState({ fullplayer: true })
+                      notification['error']({
+                        message:
+                          'Stadium Unavaliable!, Please Select other Stadium and Time!',
+                        description: 'Cannot Match'
+                      })
+                      // this.props.form.resetFields()
                     } else {
                       const result = dataAnalyte(data.data.addProfile)
                       action(result)
+                      notification['success']({
+                        message: 'Successfully Adding',
+                        description: `${values.fullname}`
+                      })
+                      // this.props.form.resetFields()
                     }
                   })
-                  notification['success']({
-                    message: 'Successfully Adding',
-                    description: `${values.fullname}`
-                  })
-                  // this.props.form.resetFields()
                 }
               })
             }}

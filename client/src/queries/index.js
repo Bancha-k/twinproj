@@ -36,6 +36,16 @@ export const GET_ALL_PROFILES = gql`
   }
 `
 
+export const GET_PLAYER = gql`
+  query($stadium: String!, $selectedTime: String!) {
+    getSelectedTeam(stadium: $stadium, selectedTime: $selectedTime) {
+      _id
+      fullName
+      team
+    }
+  }
+`
+
 export const ADD_PROFILE = gql`
   mutation(
     $fullName: String!

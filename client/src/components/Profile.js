@@ -4,7 +4,7 @@ import { Query } from 'react-apollo'
 
 import { SEARCH_PROFILES_BY_NAME } from '../queries'
 
-import { Layout, Menu, Icon, Dropdown, Input } from 'antd'
+import { Layout, Menu, Icon, Dropdown, Input, Button } from 'antd'
 import './Profile.css'
 
 import ProfileTable from './ProfileTable'
@@ -76,6 +76,14 @@ class Profile extends React.Component {
             />
 
             <div style={{ float: 'right', marginRight: 30 }}>
+              <Button
+                type="default"
+                icon="home"
+                style={{ marginRight: 20 }}
+                onClick={() => this.nextPath('/')}
+              >
+                Homepage
+              </Button>
               <Dropdown
                 overlay={
                   <Menu>

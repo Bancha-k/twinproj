@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const ProfileSchema = new Schema(
   {
-    fullName: { type: String, required: true },
+    fullName: { type: String, required: true, unique: true },
     stadium: { type: String, required: true },
     selectedTime: { type: String, required: true },
     level: { type: String, required: true },
@@ -12,7 +12,8 @@ const ProfileSchema = new Schema(
     age: { type: String, required: true },
     matched: { type: Boolean, required: true },
     clearState: { type: Boolean, required: true },
-    recordDate: { type: Date, default: Date.now }
+    recordDate: { type: Date, default: Date.now },
+    team: { type: String }
   },
   { versionKey: false }
 )
