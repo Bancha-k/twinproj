@@ -47,7 +47,7 @@ class FormInput extends React.Component {
                       })
                       // this.props.form.resetFields()
                     } else {
-                      const result = data.data.addProfile.length === 14 ? dataAnalyte(data.data.addProfile) : data.data.addProfile
+                      const result = dataAnalyte(data.data.addProfile)
                       action(result)
                       notification['success']({
                         message: 'Successfully Adding',
