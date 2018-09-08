@@ -3,17 +3,19 @@
  * @Email: comdevx@gmail.com 
  * @Date: 2018-09-03 23:56:35 
  * @Last Modified by: ComdevX
- * @Last Modified time: 2018-09-06 02:19:21
+ * @Last Modified time: 2018-09-08 17:43:03
  */
 
 import _ from 'lodash'
 
 export default data => {
   const newData = []
-
-  data.map(val => {
+  data.forEach(val => {
     const data = [val.level, val.style, val.age, val.favoriteTeam]
-    const editData = { fullName: val.fullName, data: data }
+    const editData = {
+      fullName: val.fullName,
+      data: data
+    }
 
     newData.push(editData)
   })
@@ -24,68 +26,30 @@ export default data => {
 
 const setTeam = data => {
   let result = []
-  data.forEach((pers, index) => {
-    let arr = []
-    data.forEach((pers2, index1) => {
-      if (index !== index1) {
-        arr.push({
-          fullName: pers2.fullName,
-          value: _.intersection(pers.data, pers2.data).length,
-          data: pers2.data
-        })
-      }
+  let arr = []
+  for (let i = 1; i < data.length; i++) {
+    arr.push({
+      fullName: data[i].fullName,
+      value: _.intersection(data[0].data, data[i].data).length,
+      data: data[i].data
     })
-    arr = arr.sort((a, b) => {
-      return b.value - a.value
-    })
-    let arr2 = []
-    const dup = checkDuplicate(result, pers.fullName)
-    if (dup) {
-      arr2.push({
-        fullName: pers.fullName,
-        data: pers.data,
-        team: 'A'
-      })
-      result.push({
-        fullName: pers.fullName,
-        data: pers.data,
-        team: 'A'
-      })
-    }
-    let num = 2 - 1
-    let team = false
-    let no = 1
-    for (let i = 0; i < num; i++) {
-      if (arr[i]) {
-        const dup = checkDuplicate(result, arr[i].fullName)
-        if (dup && arr2.length > 0) {
-          arr2.push({
-            fullName: arr[i].fullName,
-            data: arr[i].data,
-            team: team ? 'A' : 'B'
-          })
-          result.push({
-            fullName: arr[i].fullName,
-            data: arr[i].data,
-            team: team ? 'A' : 'B'
-          })
-          team = team ? false : true
-          arr2.length === 2 && no++
-        } else {
-          num++
-        }
-      }
-    }
-  })
-  return result
-}
-
-const checkDuplicate = (data, value) => {
-  for (let i = 0; i < data.length; i++) {
-    const obj = data[i].fullName
-    if (value === obj) {
-      return false
-    }
   }
-  return true
+  arr = arr.sort((a, b) => {
+    return b.value - a.value
+  })
+  result.push({
+    fullName: data[0].fullName,
+    data: data[0].data,
+    team: 'A'
+  })
+  let team = false
+  for (let i = 0; i < 13; i++) {
+    result.push({
+      fullName: arr[i].fullName,
+      data: arr[i].data,
+      team: team ? 'A' : 'B'
+    })
+    team = team ? false : true
+  }
+  return result
 }

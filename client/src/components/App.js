@@ -12,7 +12,7 @@ export class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      teamMatched: ''
+      teamMatched: []
     }
 
     this.getData = this.getData.bind(this)
@@ -29,17 +29,6 @@ export class App extends React.Component {
 
   render() {
     const { teamMatched } = this.state
-
-    const teamA = []
-    const teamB = []
-
-    for (let i = 0; i < teamMatched.length; i++) {
-      if (teamMatched[i].team === 'A') {
-        teamA.push(teamMatched[i].fullName)
-      } else if (teamMatched[i].team === 'B') {
-        teamB.push(teamMatched[i].fullName)
-      }
-    }
 
     return (
       <div
@@ -128,37 +117,17 @@ export class App extends React.Component {
                       color: '#fff',
                       fontSize: 15,
                       width: 'auto',
-                      // backgroundColor: '#000000',
                       opacity: 0.8,
                       maxWidth: '520px'
                     }}
                     size="small"
-                    header={<div>Team A</div>}
                     bordered={false}
-                    dataSource={teamA}
+                    dataSource={teamMatched}
                     renderItem={item => (
-                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
+                      <List.Item style={{ paddingLeft: 50 }}>{item.fullName}</List.Item>
                     )}
                   />
                   <br />
-                  <List
-                    style={{
-                      flex: 1,
-                      color: '#fff',
-                      fontSize: 15,
-                      width: 'auto',
-                      // backgroundColor: '#000000',
-                      opacity: 0.8,
-                      maxWidth: '520px'
-                    }}
-                    size="small"
-                    header={<div>Team B</div>}
-                    bordered={false}
-                    dataSource={teamB}
-                    renderItem={item => (
-                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
-                    )}
-                  />
                 </div>
               </Col>
               <Col sm={4} />

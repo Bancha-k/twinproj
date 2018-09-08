@@ -105,7 +105,7 @@ const ProfileTable = props => (
             <h2>Profile Detail</h2>{' '}
             <h3 style={{ float: 'right', marginRight: 40, marginTop: -45 }}>
               <Icon type="user" style={{ fontSize: 25, color: '#3EC8C3' }} />{' '}
-              Total: ?
+              Total: {data.getAllProfiles ? data.getAllProfiles.length : 0}
             </h3>
           </div>
           <Table

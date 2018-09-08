@@ -1,28 +1,42 @@
 exports.resolvers = {
   Query: {
-    searchProfilesByName: async (root, args, { Profile }) => {
-      const allsearchProfilesByName = await Profile.find({
-        fullName: { $regex: `.*${args.fullName}.*` }
-      })
-      return allsearchProfilesByName
-    },
-    getAllProfiles: async (root, args, { Profile }) => {
-      const allProfiles = await Profile.find()
-      return allProfiles
-    },
-    getSelectedTeam: async (root, args, { Profile }) => {
-      const allPlayer = await Profile.find({
-        stadium: args.stadium,
-        selectedTime: args.selectedTime
-      })
-      return allPlayer
-    }
+    searchProfilesByName: async (root, args, {
+        Profile
+      }) => {
+        const allsearchProfilesByName = await Profile.find({
+          fullName: new RegExp(args.fullName, 'g')
+        })
+        return allsearchProfilesByName
+      },
+      getAllProfiles: async (root, args, {
+          Profile
+        }) => {
+          const allProfiles = await Profile.find()
+          return allProfiles
+        },
+        getSelectedTeam: async (root, args, {
+          Profile
+        }) => {
+          const allPlayer = await Profile.find({
+            stadium: args.stadium,
+            selectedTime: args.selectedTime
+          })
+          return allPlayer
+        }
   },
   Mutation: {
     addProfile: async (
-      root,
-      { fullName, stadium, selectedTime, level, style, favoriteTeam, age },
-      { Profile }
+      root, {
+        fullName,
+        stadium,
+        selectedTime,
+        level,
+        style,
+        favoriteTeam,
+        age
+      }, {
+        Profile
+      }
     ) => {
       const checkFull = await Profile.find({
         stadium: stadium,
@@ -34,7 +48,7 @@ exports.resolvers = {
         // return checkFull
       } else {
         console.log('avaliable ' + checkFull.length)
-        await new Profile({
+        const result = await new Profile({
           fullName,
           stadium,
           selectedTime,
@@ -45,23 +59,29 @@ exports.resolvers = {
           matched: false,
           clearState: false,
           recordDate: new Date(),
-          team: ''
         }).save()
 
-        const newCheckFull = await Profile.find({
+        let newCheckFull = await Profile.find({
           stadium: stadium,
           selectedTime: selectedTime,
           matched: false
         })
 
         await newCheckFull.map(val => {
-          Profile.update(
-            { fullName: val.fullName },
-            { $set: { matched: true } }
-          )
+          Profile.update({
+            fullName: val.fullName
+          }, {
+            $set: {
+              matched: true
+            }
+          })
         })
-
-        return newCheckFull
+        let arr = []
+        for (let i = 0; i < newCheckFull.length - 1; i++) {
+          arr.push(newCheckFull[i])
+        }
+        arr.unshift(result)
+        return arr
       }
     }
   }
