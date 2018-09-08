@@ -207,7 +207,7 @@ class FormInput extends React.Component {
                 </Select>
               )}
             </FormItem>
-            <FormItem wrapperCol={{ span: 12, offset: 7 }}>
+            <FormItem wrapperCol={{ span: 18 }}>
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
