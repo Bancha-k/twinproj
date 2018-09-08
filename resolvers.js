@@ -79,12 +79,14 @@ exports.resolvers = {
           ).exec()
         })
 
-        let arr = []
-        for (let i = 0; i < newCheckFull.length - 1; i++) {
-          arr.push(newCheckFull[i])
-        }
-        arr.unshift(result)
-        return arr
+        let matchedList = await Profile.find({
+          stadium: stadium,
+          selectedTime: selectedTime,
+          matched: true,
+          clearState: false
+        })
+
+        return matchedList
       }
     }
   }
