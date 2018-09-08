@@ -30,6 +30,17 @@ export class App extends React.Component {
   render() {
     const { teamMatched } = this.state
 
+    const teamA = []
+    const teamB = []
+
+    teamMatched.forEach(val => {
+      if (val.team === 'A') {
+        teamA.push(val.fullName)
+      } else if (val.team === 'B') {
+        teamB.push(val.fullName)
+      }
+    })
+
     return (
       <div
         style={{
@@ -120,10 +131,28 @@ export class App extends React.Component {
                       maxWidth: '520px'
                     }}
                     size="small"
+                    header={<div>Team A</div>}
                     bordered={false}
-                    dataSource={teamMatched}
+                    dataSource={teamA}
                     renderItem={item => (
-                      <List.Item style={{ paddingLeft: 50 }}>{item.fullName}</List.Item>
+                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
+                    )}
+                  />
+                  <List
+                    style={{
+                      flex: 1,
+                      color: '#fff',
+                      fontSize: 15,
+                      width: 'auto',
+                      opacity: 0.8,
+                      maxWidth: '520px'
+                    }}
+                    size="small"
+                    header={<div>Team B</div>}
+                    bordered={false}
+                    dataSource={teamB}
+                    renderItem={item => (
+                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
                     )}
                   />
                   <br />
