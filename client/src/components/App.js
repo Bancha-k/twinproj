@@ -3,11 +3,10 @@ import { withRouter } from 'react-router-dom'
 
 import { Row, Col, List, Button } from 'antd'
 import FormInput from './FormInput'
-import TextArea from 'antd/lib/input/TextArea'
 
 const bgSrc = require(`../assets/matchkickoff_bg.png`)
-const logoSrc = require(`../assets/logo@72x.png`)
-// const fieldSrc = require(`../assets/field.png`)
+const logoSrc = require(`../assets/logo.png`)
+const fieldSrc = require(`../assets/field.png`)
 
 export class App extends React.Component {
   constructor(props) {
@@ -30,7 +29,7 @@ export class App extends React.Component {
 
   render() {
     const { teamMatched } = this.state
-    
+
     return (
       <div
         style={{
@@ -46,23 +45,17 @@ export class App extends React.Component {
           overflow: 'auto'
         }}
       >
-        <div
-          style={{
-            flex: 1,
-            position: 'relative',
-            height: '100px',
-            marginTop: 50
-          }}
-        >
+        <div>
           <img
             src={logoSrc}
             style={{
-              position: 'absolute',
-              margin: 'auto',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0
+              display: 'block',
+              marginTop: 50,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: '100%',
+              maxWidth: '330px',
+              maxHeight: '54px'
             }}
             alt="logo"
           />
@@ -81,49 +74,70 @@ export class App extends React.Component {
             style={{ marginTop: 50 }}
           >
             <Col sm={12} align="center" justify="center">
-              <div>
-                <List
+              <Col sm={12} style={{ flex: 1 }}>
+                <h2
+                  className="ant-form-label"
                   style={{
-                    color: '#fff',
-                    fontSize: 15,
-                    width: 400,
-                    backgroundColor: '#000000',
-                    opacity: 0.8
+                    textAlign: 'center',
+                    // marginBottom: 0,
+                    color: 'white'
                   }}
-                  size="small"
-                  // header={<div>Team A</div>}
-                  bordered={false}
-                  dataSource={teamMatched}
-                  renderItem={item => (
-                    <List.Item style={{ paddingLeft: 50 }}>{item.fullName}</List.Item>
-                  )}
-                />
-                <br />
-                {/* <List
+                >
+                  Stadium : xxxx
+                </h2>
+              </Col>
+              <Col sm={12} style={{ flex: 1 }}>
+                <h2
+                  className="ant-form-label"
                   style={{
-                    color: '#fff',
-                    fontSize: 15,
-                    width: 400,
-                    backgroundColor: '#000000',
-                    opacity: 0.8
+                    textAlign: 'center',
+                    // marginBottom: 0,
+                    color: 'white'
                   }}
-                  size="small"
-                  header={<div>Team B</div>}
-                  bordered={false}
-                  dataSource={teamB}
-                  renderItem={item => (
-                    <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
-                  )}
-                /> */}
-              </div>
+                >
+                  Time : xxxx
+                </h2>
+              </Col>
+              <Col sm={4} />
+              <Col sm={16}>
+                <div
+                  style={{
+                    flex: 1,
+                    height: '700px',
+                    backgroundImage: `url(${fieldSrc})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  <List
+                    style={{
+                      flex: 1,
+                      color: '#fff',
+                      fontSize: 15,
+                      width: 'auto',
+                      opacity: 0.8,
+                      maxWidth: '520px'
+                    }}
+                    size="small"
+                    bordered={false}
+                    dataSource={teamMatched}
+                    renderItem={item => (
+                      <List.Item style={{ paddingLeft: 50 }}>{item.fullName}</List.Item>
+                    )}
+                  />
+                  <br />
+                </div>
+              </Col>
+              <Col sm={4} />
             </Col>
-            <Col sm={12}>
+            <Col sm={12} align="center" justify="center">
               <FormInput action={this.getData} />{' '}
               <Button
                 type="default"
                 icon="area-chart"
                 style={{
-                  marginLeft: 265,
+                  // marginLeft: '270px',
                   opacity: 0.3,
                   backgroundColor: '#000000',
                   color: '#fff'
