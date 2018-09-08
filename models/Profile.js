@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const ProfileSchema = new Schema(
   {
-    fullName: { type: String, required: true },
+    fullName: { type: String, required: true, unique: true },
     stadium: { type: String, required: true },
     selectedTime: { type: String, required: true },
     level: { type: String, required: true },

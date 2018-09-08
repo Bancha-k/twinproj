@@ -2,7 +2,7 @@ exports.typeDefs = `
 
     type Profile {
         _id: ID!
-        fullName: String!
+        fullName: String! @unique
         stadium: String!
         selectedTime: String!
         level: String!
