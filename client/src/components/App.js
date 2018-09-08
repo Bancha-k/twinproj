@@ -12,16 +12,17 @@ export class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      teamMatched: [],
-      inform: []
+      list: [],
+      inform: {}
     }
 
     this.getData = this.getData.bind(this)
     this.getInform = this.getInform.bind(this)
   }
+
   getData(val) {
     this.setState({
-      teamMatched: val
+      list: val
     })
   }
 
@@ -36,12 +37,12 @@ export class App extends React.Component {
   }
 
   render() {
-    const { teamMatched, inform } = this.state
+    const { list, inform } = this.state
 
     const teamA = []
     const teamB = []
 
-    teamMatched.forEach(val => {
+    list.forEach(val => {
       if (val.team === 'A') {
         teamA.push(val.fullName)
       } else if (val.team === 'B') {
@@ -130,41 +131,62 @@ export class App extends React.Component {
                     backgroundPosition: 'center'
                   }}
                 >
-                  <List
-                    style={{
-                      flex: 1,
-                      color: '#fff',
-                      fontSize: 15,
-                      width: 'auto',
-                      opacity: 0.8,
-                      maxWidth: '520px'
-                    }}
-                    size="small"
-                    header={<div>Team A</div>}
-                    bordered={false}
-                    dataSource={teamA}
-                    renderItem={item => (
-                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
+                  {teamA.length > 0 ? (
+                    <div>
+                      <List
+                        style={{
+                          flex: 1,
+                          color: '#fff',
+                          fontSize: 15,
+                          width: 'auto',
+                          opacity: 0.8,
+                          maxWidth: '520px'
+                        }}
+                        size="small"
+                        header={<div>Team A</div>}
+                        bordered={false}
+                        dataSource={teamA}
+                        renderItem={item => (
+                          <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
+                        )}
+                      />
+                      <List
+                        style={{
+                          flex: 1,
+                          color: '#fff',
+                          fontSize: 15,
+                          width: 'auto',
+                          opacity: 0.8,
+                          maxWidth: '520px'
+                        }}
+                        size="small"
+                        header={<div>Team B</div>}
+                        bordered={false}
+                        dataSource={teamB}
+                        renderItem={item => (
+                          <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
+                        )}
+                      />
+                    </div>
+                  ) : (
+                      <List
+                        style={{
+                          flex: 1,
+                          color: '#fff',
+                          fontSize: 15,
+                          width: 'auto',
+                          opacity: 0.8,
+                          maxWidth: '520px'
+                        }}
+                        size="small"
+                        header={<div>List</div>}
+                        bordered={false}
+                        dataSource={list}
+                        renderItem={item => (
+                          <List.Item style={{ paddingLeft: 50 }}>{item.fullName}</List.Item>
+                        )}
+                      />
                     )}
-                  />
-                  <List
-                    style={{
-                      flex: 1,
-                      color: '#fff',
-                      fontSize: 15,
-                      width: 'auto',
-                      opacity: 0.8,
-                      maxWidth: '520px'
-                    }}
-                    size="small"
-                    header={<div>Team B</div>}
-                    bordered={false}
-                    dataSource={teamB}
-                    renderItem={item => (
-                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
-                    )}
-                  />
-                  <br />
                 </div>
               </Col>
               <Col sm={4} />
