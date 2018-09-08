@@ -75,7 +75,8 @@ export class App extends React.Component {
           style={{
             margin: '24px 20px 0',
             overflow: 'initial',
-            textColor: 'white'
+            textColor: 'white',
+            marginBottom: '50px'
           }}
         >
           <Row
