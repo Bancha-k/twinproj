@@ -47,7 +47,7 @@ exports.resolvers = {
         matched: false,
         clearState: false
       })
-      if (checkFull.length === 14) {
+      if (checkFull.length >= 14) {
         console.log('unavaliable ' + checkFull.length)
         // return checkFull
       } else {
