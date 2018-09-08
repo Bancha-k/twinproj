@@ -62,7 +62,7 @@ class FormInput extends React.Component {
           >
             <FormItem
               label={<label style={{ color: 'white' }}>Full Name</label>}
-              labelCol={{ span: 5 }}
+              labelCol={{ span: 6 }}
               wrapperCol={{ span: 12 }}
             >
               {getFieldDecorator('fullname', {
@@ -73,7 +73,7 @@ class FormInput extends React.Component {
             </FormItem>
             <FormItem
               label={<label style={{ color: 'white' }}>Stadium</label>}
-              labelCol={{ span: 5 }}
+              labelCol={{ span: 6 }}
               wrapperCol={{ span: 8 }}
             >
               {getFieldDecorator('stadium', {
@@ -91,7 +91,7 @@ class FormInput extends React.Component {
             </FormItem>
             <FormItem
               label={<label style={{ color: 'white' }}>Time</label>}
-              labelCol={{ span: 5 }}
+              labelCol={{ span: 6 }}
               wrapperCol={{ span: 8 }}
             >
               {getFieldDecorator('time', {
@@ -121,7 +121,7 @@ class FormInput extends React.Component {
             </FormItem>
             <FormItem
               label={<label style={{ color: 'white' }}>Level</label>}
-              labelCol={{ span: 5 }}
+              labelCol={{ span: 6 }}
               wrapperCol={{ span: 8 }}
             >
               {getFieldDecorator('level', {
@@ -139,7 +139,7 @@ class FormInput extends React.Component {
             </FormItem>
             <FormItem
               label={<label style={{ color: 'white' }}>Style</label>}
-              labelCol={{ span: 5 }}
+              labelCol={{ span: 6 }}
               wrapperCol={{ span: 8 }}
             >
               {getFieldDecorator('style', {
@@ -160,7 +160,7 @@ class FormInput extends React.Component {
             </FormItem>
             <FormItem
               label={<label style={{ color: 'white' }}>Favorite Team</label>}
-              labelCol={{ span: 5 }}
+              labelCol={{ span: 6 }}
               wrapperCol={{ span: 8 }}
             >
               {getFieldDecorator('favoriteTeam', {
@@ -190,7 +190,7 @@ class FormInput extends React.Component {
             </FormItem>
             <FormItem
               label={<label style={{ color: 'white' }}>Age</label>}
-              labelCol={{ span: 5 }}
+              labelCol={{ span: 6 }}
               wrapperCol={{ span: 8 }}
             >
               {getFieldDecorator('age', {

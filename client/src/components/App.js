@@ -81,7 +81,7 @@ export class App extends React.Component {
         </div>
         <div
           style={{
-            margin: '24px 20px 0',
+            margin: '100px 20px 0',
             overflow: 'initial',
             textColor: 'white',
             marginBottom: '50px'
@@ -94,80 +94,82 @@ export class App extends React.Component {
             style={{ marginTop: 50 }}
           >
             <Col sm={12} align="center" justify="center">
-              <Col sm={12} style={{ flex: 1 }}>
-                <h2
-                  className="ant-form-label"
-                  style={{
-                    textAlign: 'center',
-                    // marginBottom: 0,
-                    color: 'white'
-                  }}
-                >
-                  Stadium : {inform.stadium}
-                </h2>
-              </Col>
-              <Col sm={12} style={{ flex: 1 }}>
-                <h2
-                  className="ant-form-label"
-                  style={{
-                    textAlign: 'center',
-                    // marginBottom: 0,
-                    color: 'white'
-                  }}
-                >
-                  Time : {inform.time}
-                </h2>
-              </Col>
-              <Col sm={4} />
-              <Col sm={16}>
-                <div
-                  style={{
-                    flex: 1,
-                    height: '700px',
-                    backgroundImage: `url(${fieldSrc})`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <List
-                    style={{
-                      flex: 1,
-                      color: '#fff',
-                      fontSize: 15,
-                      width: 'auto',
-                      opacity: 0.8,
-                      maxWidth: '520px'
-                    }}
-                    size="small"
-                    header={<div>Team A</div>}
-                    bordered={false}
-                    dataSource={teamA}
-                    renderItem={item => (
-                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
-                    )}
-                  />
-                  <List
-                    style={{
-                      flex: 1,
-                      color: '#fff',
-                      fontSize: 15,
-                      width: 'auto',
-                      opacity: 0.8,
-                      maxWidth: '520px'
-                    }}
-                    size="small"
-                    header={<div>Team B</div>}
-                    bordered={false}
-                    dataSource={teamB}
-                    renderItem={item => (
-                      <List.Item style={{ paddingLeft: 50 }}>{item}</List.Item>
-                    )}
-                  />
-                  <br />
+              {this.state.teamMatched.length !== 0 && (
+                <div>
+                  <Col sm={12} style={{ flex: 1 }}>
+                    <h2
+                      className="ant-form-label"
+                      style={{
+                        textAlign: 'center',
+                        color: 'white'
+                      }}
+                    >
+                      Stadium : {inform.stadium}
+                    </h2>
+                  </Col>
+                  <Col sm={12} style={{ flex: 1 }}>
+                    <h2
+                      className="ant-form-label"
+                      style={{
+                        textAlign: 'center',
+                        color: 'white'
+                      }}
+                    >
+                      Time : {inform.time}
+                    </h2>
+                  </Col>
+                  <Col sm={4} />
+                  <Col sm={16}>
+                    <div
+                      style={{
+                        flex: 1
+                      }}
+                    >
+                      <List
+                        style={{
+                          flex: 1,
+                          color: '#fff',
+                          fontSize: 15,
+                          width: 'auto',
+                          opacity: 0.8,
+                          backgroundColor: '#447a3a',
+                          maxWidth: '520px',
+                          border: '1px solid #000;'
+                        }}
+                        size="small"
+                        header={<div>Team A</div>}
+                        dataSource={teamA}
+                        renderItem={item => (
+                          <List.Item style={{ paddingLeft: 50 }}>
+                            {item}
+                          </List.Item>
+                        )}
+                      />
+                      <List
+                        style={{
+                          flex: 1,
+                          color: '#fff',
+                          fontSize: 15,
+                          width: 'auto',
+                          opacity: 0.8,
+                          backgroundColor: '#447a3a',
+                          maxWidth: '520px'
+                        }}
+                        size="small"
+                        header={<div>Team B</div>}
+                        dataSource={teamB}
+                        renderItem={item => (
+                          <List.Item style={{ paddingLeft: 50 }}>
+                            {item}
+                          </List.Item>
+                        )}
+                      />
+                      <br />
+                    </div>
+                  </Col>
+                  <Col sm={4} />
                 </div>
-              </Col>
-              <Col sm={4} />
+              )}
             </Col>
             <Col sm={12} align="center" justify="center">
               <FormInput action={this.getData} detail={this.getInform} />{' '}
@@ -175,7 +177,6 @@ export class App extends React.Component {
                 type="default"
                 icon="area-chart"
                 style={{
-                  // marginLeft: '270px',
                   opacity: 0.3,
                   backgroundColor: '#000000',
                   color: '#fff'
