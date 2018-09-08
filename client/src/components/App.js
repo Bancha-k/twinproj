@@ -85,6 +85,30 @@ export class App extends React.Component {
             style={{ marginTop: 50 }}
           >
             <Col sm={12} align="center" justify="center">
+              <Col sm={12} style={{ flex: 1 }}>
+                <h2
+                  className="ant-form-label"
+                  style={{
+                    textAlign: 'center',
+                    // marginBottom: 0,
+                    color: 'white'
+                  }}
+                >
+                  Stadium : xxxx
+                </h2>
+              </Col>
+              <Col sm={12} style={{ flex: 1 }}>
+                <h2
+                  className="ant-form-label"
+                  style={{
+                    textAlign: 'center',
+                    // marginBottom: 0,
+                    color: 'white'
+                  }}
+                >
+                  Time : xxxx
+                </h2>
+              </Col>
               <Col sm={4} />
               <Col sm={16}>
                 <div
@@ -103,7 +127,7 @@ export class App extends React.Component {
                       color: '#fff',
                       fontSize: 15,
                       width: 'auto',
-                      backgroundColor: '#000000',
+                      // backgroundColor: '#000000',
                       opacity: 0.8,
                       maxWidth: '520px'
                     }}
@@ -122,7 +146,7 @@ export class App extends React.Component {
                       color: '#fff',
                       fontSize: 15,
                       width: 'auto',
-                      backgroundColor: '#000000',
+                      // backgroundColor: '#000000',
                       opacity: 0.8,
                       maxWidth: '520px'
                     }}
