@@ -1,6 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
+import './App.css'
+
 import { Row, Col, List, Button } from 'antd'
 import FormInput from './FormInput'
 
@@ -133,8 +135,7 @@ export class App extends React.Component {
                           width: 'auto',
                           opacity: 0.8,
                           backgroundColor: '#447a3a',
-                          maxWidth: '520px',
-                          border: '1px solid #000;'
+                          maxWidth: '520px'
                         }}
                         size="small"
                         header={<div>Team A</div>}
