@@ -53,7 +53,7 @@ exports.resolvers = {
         return null
       } else {
         console.log('outcase')
-        let newProfile = await new Profile({
+        await new Profile({
           fullName,
           stadium,
           selectedTime,
@@ -72,8 +72,6 @@ exports.resolvers = {
           matched: true,
           clearState: false
         })
-
-        changedProfile.push(newProfile)
 
         return changedProfile
       }

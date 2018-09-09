@@ -29,6 +29,10 @@ class Stadium extends React.Component {
     selectTime: ''
   }
 
+  componentWillMount() {
+    window.location.reload()
+  }
+
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed
@@ -138,7 +142,7 @@ class Stadium extends React.Component {
                   <FormItem
                     label="Stadium"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 14 }}
+                    wrapperCol={{ span: 12 }}
                     style={{ marginTop: 30 }}
                   >
                     {getFieldDecorator('stadium', {
@@ -148,7 +152,7 @@ class Stadium extends React.Component {
                     })(
                       <Select
                         placeholder="Select Stadium"
-                        style={{ width: 300 }}
+                        style={{ width: 200 }}
                       >
                         <Option value="Stadium 1">Stadium 1</Option>
                         <Option value="Stadium 2">Stadium 2</Option>
@@ -166,7 +170,7 @@ class Stadium extends React.Component {
                         { required: true, message: 'Please select Time!' }
                       ]
                     })(
-                      <Select placeholder="Select Time" style={{ width: 300 }}>
+                      <Select placeholder="Select Time" style={{ width: 200 }}>
                         <Option value="Morning">Morning</Option>
                         <Option value="Afternoon">Afternoon</Option>
                         <Option value="Evening">Evening</Option>

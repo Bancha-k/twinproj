@@ -17,6 +17,10 @@ class Profile extends React.Component {
     searchByName: ''
   }
 
+  componentWillMount() {
+    window.location.reload()
+  }
+
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed
