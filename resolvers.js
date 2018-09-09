@@ -44,15 +44,16 @@ exports.resolvers = {
       const checkFull = await Profile.find({
         stadium: stadium,
         selectedTime: selectedTime,
-        matched: false,
+        matched: true,
         clearState: false
       })
-      if (checkFull.length > 14 || checkFull.length == 14) {
-        console.log('unavaliable ' + checkFull.length)
-        // return checkFull
+      console.log(checkFull.length)
+      if (checkFull.length >= 14) {
+        console.log('incase')
+        return null
       } else {
-        console.log('avaliable ' + checkFull.length)
-        const result = await new Profile({
+        console.log('outcase')
+        let newProfile = await new Profile({
           fullName,
           stadium,
           selectedTime,
@@ -60,34 +61,52 @@ exports.resolvers = {
           style,
           favoriteTeam,
           age,
-          matched: false,
+          matched: true,
           clearState: false,
           recordDate: new Date()
         }).save()
 
-        let newCheckFull = await Profile.find({
-          stadium: stadium,
-          selectedTime: selectedTime,
-          matched: false,
-          clearState: false
-        })
-
-        await newCheckFull.map(params => {
-          Profile.updateOne(
-            { _id: params._id },
-            { $set: { matched: true } }
-          ).exec()
-        })
-
-        let matchedList = await Profile.find({
+        let changedProfile = await Profile.find({
           stadium: stadium,
           selectedTime: selectedTime,
           matched: true,
           clearState: false
         })
 
-        return matchedList
+        changedProfile.push(newProfile)
+
+        return changedProfile
       }
+
+      // if (checkFull.length < 14 || checkFull.length == 14) {
+      //   console.log('avaliable ' + checkFull.length)
+      //   let newProfile = await new Profile({
+      //     fullName,
+      //     stadium,
+      //     selectedTime,
+      //     level,
+      //     style,
+      //     favoriteTeam,
+      //     age,
+      //     matched: true,
+      //     clearState: false,
+      //     recordDate: new Date()
+      //   }).save()
+
+      //   let changedProfile = await Profile.updateMany(
+      //     {
+      //       stadium: stadium,
+      //       selectedTime: selectedTime,
+      //       matched: false,
+      //       clearState: false
+      //     },
+      //     { $set: { matched: true } },
+      //     { multi: true }
+      //   ).exec()
+
+      //   changedProfile.push(newProfile)
+      //   console.log(changedProfile)
+      // }
     }
   }
 }

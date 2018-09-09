@@ -8,7 +8,6 @@ import FormInput from './FormInput'
 
 const bgSrc = require(`../assets/matchkickoff_bg.png`)
 const logoSrc = require(`../assets/logo.png`)
-const fieldSrc = require(`../assets/field.png`)
 
 export class App extends React.Component {
   constructor(props) {
