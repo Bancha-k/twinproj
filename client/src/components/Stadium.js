@@ -29,10 +29,6 @@ class Stadium extends React.Component {
     selectTime: ''
   }
 
-  componentWillMount() {
-    window.location.reload()
-  }
-
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed
